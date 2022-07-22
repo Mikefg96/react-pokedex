@@ -5,6 +5,7 @@
   width: 100%;
   padding: 10px;
   background: url('./assets/pokemon-background.gif') no-repeat center center;
+  background-size: cover;
 }
 
 .start-menu-wrapper {
