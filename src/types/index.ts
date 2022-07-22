@@ -11,7 +11,8 @@ export const initialPokemonState: IPokemon = {
   height: 0,
   weight: 0,
   sprite: '',
-  types: []
+  types: [],
+  stats: []
 }
 
 export type IPokemon = {

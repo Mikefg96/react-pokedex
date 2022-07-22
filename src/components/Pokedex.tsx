@@ -28,13 +28,20 @@ const Pokedex = () => {
 
   const structurePokeapiResponse = (res: any) => {
     setHasError(false)
-
+  
+    /* 
+    ** Pokéapi bug -> sprites urls are built incorrectly.
+    ** Example: https://raw.githubusercontent.com/PokeAPI/sprites/master/https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png
+    ** Fix: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png
+    */
+    const sprite = res.sprites.front_default.split('https')[2]
+  
     const pokemon: IPokemon = {
       id: res.id,
       name: res.name,
       height: res.height,
       weight: res.weight,
-      sprite: res.sprites.front_default,
+      sprite: `https${sprite}`,
       types: res.types,
       stats: res.stats
     }
