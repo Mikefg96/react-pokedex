@@ -14,6 +14,7 @@ function App() {
   const StartMenuAudio = new Audio(start)
   const ActionAudio = new Audio(action)
   
+  // Handles navigation flow between menu -> pokédex, and viceversa
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if(event.key === 'Enter' && !isPokedexOpen) {
       StartMenuAudio.play()

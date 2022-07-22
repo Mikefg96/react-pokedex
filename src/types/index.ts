@@ -17,15 +17,25 @@ export const initialPokemonState: IPokemon = {
 export type IPokemon = {
   id: Number
   name: string
-  height: Number
-  weight: Number
+  height: number
+  weight: number
   sprite: string
   types: IPokemonType[]
+  stats: IPokemonStats[]
 }
 
 export type IPokemonType = {
   slot: Number
   type: {
+    name: string
+    url: string
+  }
+}
+
+export type IPokemonStats = {
+  base_stat: number
+  effort: number
+  stat: {
     name: string
     url: string
   }

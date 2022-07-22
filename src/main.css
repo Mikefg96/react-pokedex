@@ -75,3 +75,7 @@
 
 .capitalize { text-transform: capitalize; }
 .max-content { width: max-content }
+
+.nes-list.is-circle li::before {
+  color: #FFF !important;
+}

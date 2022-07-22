@@ -9,7 +9,7 @@ const Pokedex = () => {
   const [inputValue, setInputValue] = useState<string>('')
   const [pokemon, setPokemon] = useState<IPokemon>(initialPokemonState)
  
-  // Debounce function to handle API calls correctly
+  // Debounce function to handle API calls
   useEffect(() => {
     if(!inputValue) { return }
 
@@ -35,7 +35,8 @@ const Pokedex = () => {
       height: res.height,
       weight: res.weight,
       sprite: res.sprites.front_default,
-      types: res.types
+      types: res.types,
+      stats: res.stats
     }
 
     setPokemon(pokemon)
@@ -79,27 +80,45 @@ const Pokedex = () => {
 
   return (
     <div className='pokedex-wrapper'> 
-      <div className='nes-container is-rounded is-dark sprite-container'>
-      { isLoading ? <LoadingAsh />
-      : 
-        <>
-          <h3 className='capitalize'>{pokemon.name}</h3>
-          <img src={pokemon.sprite} alt={pokemon.name} />
-          <p>No. {pokemon.id.toString().padStart(3, '0')}</p>
-        </>
-      }
-      </div>
-      <div className='nes-container is-rounded is-dark details-container'>
-        { isLoading ? <LoadingStarters/> 
-        :
-          <div className='nes-container is-rounded is-dark with-title'>
-            <h3 className='title'>Type(s)</h3>
-            { pokemon.types.map((type: IPokemonType) => (
-              <TypeBadge type={type.type.name}/>
-            )) } 
-          </div>
+    { pokemon.name && (
+      <>
+        <div className='nes-container is-rounded is-dark sprite-container'>
+        { isLoading ? <LoadingAsh />
+        : 
+          <>
+            <h3 className='capitalize'>{pokemon.name}</h3>
+            <img src={pokemon.sprite} alt={pokemon.name} />
+            <p>No. {pokemon.id.toString().padStart(3, '0')}</p>
+          </>
         }
-      </div>
+        </div>
+        <div className='nes-container is-rounded is-dark details-container'>
+          { isLoading ? <LoadingStarters/> 
+          :
+          <>
+            <div className='nes-container is-rounded is-dark with-title'>
+              <h3 className='title'>Type(s)</h3>
+              { pokemon.types.map((type: IPokemonType) => (
+                <TypeBadge type={type.type.name}/>
+              )) } 
+            </div>
+            <div className='lists'>
+              <ul className='nes-list is-circle'>
+                <li>{pokemon.height / 10} meters</li>
+                <li>{pokemon.weight / 10} kilograms</li>
+              </ul>
+              <p>Stats</p>
+              <ul className="nes-list is-circle">
+              { pokemon.stats.map((stat) => (
+                  <li>{stat.base_stat} {stat.stat.name}</li>
+                )) }
+              </ul>
+            </div>
+          </>  
+          }
+        </div>
+      </>
+    )}
       <div className='nes-container with-title is-rounded search-container'>
         <h3 className='title max-content'>{ hasError ? 'Pokémon not found' : 'Search your favorite Pokémon!' }</h3>
         <div className='nes-field'>
